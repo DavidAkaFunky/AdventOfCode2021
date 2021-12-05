@@ -18,7 +18,7 @@ def hor_line(grid, x, y1, y2):
     for y in get_range(y1, y2):
         grid[x][y] += 1
 
-def ver_line(grid, x1, x2, y):
+def ver_line(grid, y, x1, x2):
     for x in get_range(x1, x2):
         grid[x][y] += 1
 
@@ -39,8 +39,8 @@ def solve(grid, lines, flag):
         if x1 == x2:
             hor_line(grid, x1, y1, y2)
         elif y1 == y2:
-            ver_line(grid, x1, x2, y1)
-        if flag and abs(x1 - x2) == abs(y1 - y2):
+            ver_line(grid, y1, x1, x2)
+        elif flag and abs(x1 - x2) == abs(y1 - y2):
             diag_line(grid, x1, x2, y1, y2)
     return find_overlaps(grid)
 
