@@ -75,7 +75,6 @@ def part2(values, cards, cards_b):
                     print(x, sum, value)
                     return sum * value
 
-
 def main():
     f = open("input.txt", "r")
     values, cards, cards_b = process(f.readlines())
