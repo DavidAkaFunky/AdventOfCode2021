@@ -10,7 +10,6 @@ def solve(input, flag):
         fuels.append(fuel)
     return min(fuels)
 
-
 def main():
     f = open("input.txt", "r")
     input = [int(x) for x in f.readline().split(",")]

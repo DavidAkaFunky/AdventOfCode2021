@@ -7,6 +7,7 @@ def solve(x, k):
 
 def main():
     f = open("input.txt", "r")
+    print(f.readlines())
     input = [int(x) for x in f.readlines()]
     print(solve(input, 1)) #Part 1: 1548
     print(solve(input, 3)) #Part 2: 1589
