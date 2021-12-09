@@ -32,12 +32,9 @@ def part2(lines):
         value = ""
         for x in line[1]:
             x = sorted(x)
-            if len(x) == 2:
-                value += "1"
-            elif len(x) == 3:
-                value += "7"
-            elif len(x) == 4:
-                value += "4"
+            lengths = {2: "1", 3: "7", 4: "4", 7: "8"}
+            if len(x) in lengths:
+                value += lengths[len(x)]
             elif len(x) == 5:
                 if match(one, x):
                     value += "3"
@@ -52,8 +49,6 @@ def part2(lines):
                     value += "6"
                 else:
                     value += "0"
-            elif len(x) == 7:
-                value += "8"
         total += int(value)
     return total
 
