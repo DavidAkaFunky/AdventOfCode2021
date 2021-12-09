@@ -25,9 +25,9 @@ def part1(lines):
     return total, sinks
 
 def part2(lines, sinks):
-    def mark(i, j, visited, value, basin_size, lines, queue):
+    def mark(i, j, visited, value, basin_size, lines, stack):
         if not visited[i][j] and 9 > lines[i][j] > value:
-            queue.append((i, j))
+            stack.append((i, j))
             visited[i][j] = True
             return basin_size + 1
         return basin_size
@@ -35,18 +35,18 @@ def part2(lines, sinks):
     basin_sizes = []
     for sink in sinks:
         basin_size = 1
-        queue = [sink]
-        while queue != []:
-            (i, j) = queue.pop(-1)
+        stack = [sink]
+        while stack != []:
+            (i, j) = stack.pop(-1)
             value = lines[i][j]
             if i-1 >= 0:
-                basin_size = mark(i-1, j, visited, value, basin_size, lines, queue)
+                basin_size = mark(i-1, j, visited, value, basin_size, lines, stack)
             if i+1 < len(lines):
-                basin_size = mark(i+1, j, visited, value, basin_size, lines, queue)
+                basin_size = mark(i+1, j, visited, value, basin_size, lines, stack)
             if j-1 >= 0:
-                basin_size = mark(i, j-1, visited, value, basin_size, lines, queue)
+                basin_size = mark(i, j-1, visited, value, basin_size, lines, stack)
             if j+1 < len(lines[i]):
-                basin_size = mark(i, j+1, visited, value, basin_size, lines, queue)
+                basin_size = mark(i, j+1, visited, value, basin_size, lines, stack)
         basin_sizes.append(basin_size)
     basin_sizes = sorted(basin_sizes)
     return basin_sizes[-1] * basin_sizes[-2] * basin_sizes[-3]
