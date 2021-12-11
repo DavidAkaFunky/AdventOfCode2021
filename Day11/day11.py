@@ -1,9 +1,3 @@
-def process(lines):
-    res = []
-    for line in lines:
-        res.append([int(x) for x in line.strip()])
-    return res
-
 def update(lines):
     def get_neighbours(lines, i, j):
         neighbours = []
@@ -50,7 +44,7 @@ def part2(lines):
 def main():
     from copy import deepcopy
     f = open("input.txt", "r")
-    input = process(f.readlines())
+    input = [[int(x) for x in line.strip()] for line in f.readlines()]
     print(part1(deepcopy(input), 100)) #Part 1: 1613
     print(part2(deepcopy(input))) #Part 2: 510
     f.close()
