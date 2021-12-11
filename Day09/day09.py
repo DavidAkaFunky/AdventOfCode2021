@@ -1,9 +1,3 @@
-def process(lines):
-    res = []
-    for line in lines:
-        res.append([int(x) for x in line.strip()])
-    return res
-
 def part1(lines):
     total = 0
     sinks = []
@@ -53,7 +47,7 @@ def part2(lines, sinks):
 
 def main():
     f = open("input.txt", "r")
-    input = process(f.readlines())
+    input = [[int(x) for x in line.strip()] for line in f.readlines()]
     sink_number, sinks = part1(input)
     print(sink_number) #Part 1: 506
     print(part2(input, sinks)) #Part 2: 931200

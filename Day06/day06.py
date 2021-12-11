@@ -1,5 +1,5 @@
 def solve(input, days, max, respawn):
-    fish = [0 for x in range(0, max + 1)]
+    fish = [0 for _ in range(max + 1)]
     for i in input:
         fish[i] += 1
     for _ in range(days):

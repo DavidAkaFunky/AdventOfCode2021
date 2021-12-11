@@ -1,10 +1,3 @@
-def process(lines):
-    res = []
-    for line in lines:
-        line = line.strip().split("|")
-        res.append([line[0].split(), line[1].split()])
-    return res
-
 def part1(lines, numbers):
     total = 0
     for line in lines:
@@ -54,7 +47,7 @@ def part2(lines):
 
 def main():
     f = open("input.txt", "r")
-    input = process(f.readlines())
+    input = [[int(x) for x in line.strip()] for line in f.readlines()]
     print(part1(input, [2, 3, 4, 7])) #Part 1: 397
     print(part2(input)) #Part 2: 1027422
     f.close()
