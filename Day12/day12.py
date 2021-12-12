@@ -28,8 +28,7 @@ def solve(graph, lower, start, end, flag):
                     return 0
             visited[head] = True
         return sum(recursion(graph, x, lower, end, deepcopy(visited), flag, twice) for x in graph[head])
-    visited = {key: False for key in lower}
-    return recursion(graph, start, lower, end, deepcopy(visited), flag, False)
+    return recursion(graph, start, lower, end, {key: False for key in lower}, flag, False)
 
 
 def main():
