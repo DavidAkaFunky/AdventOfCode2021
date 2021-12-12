@@ -14,38 +14,30 @@ def create_graph(lines, start, end):
         add_edge(adj, x2, x1, start, end)
     return adj, [key for key in adj if key not in [start, end] and key != key.upper()]
 
-def part1(graph, lower, start, end):
-    def recursion(graph, head, lower, end, visited):
+def solve(graph, lower, start, end, flag):
+    def recursion(graph, head, lower, end, visited, flag, twice):
         if head == end:
             return 1
         if head in lower:
             if visited[head]:
-                return 0
-            visited[head] = True
-        return sum(recursion(graph, x, lower, end, deepcopy(visited)) for x in graph[head])
-    visited = {key: False for key in lower}
-    return recursion(graph, start, lower, end, deepcopy(visited))
-
-def part2(graph, lower, start, end):
-    def recursion(graph, head, lower, end, visited, twice):
-        if head == end:
-            return 1
-        if head in lower:
-            if visited[head]:
-                if twice:
+                if flag:
+                    if twice:
+                        return 0
+                    twice = True
+                else:
                     return 0
-                twice = True
             visited[head] = True
-        return sum(recursion(graph, x, lower, end, deepcopy(visited), twice) for x in graph[head])
+        return sum(recursion(graph, x, lower, end, deepcopy(visited), flag, twice) for x in graph[head])
     visited = {key: False for key in lower}
-    return recursion(graph, start, lower, end, deepcopy(visited), False)
+    return recursion(graph, start, lower, end, deepcopy(visited), flag, False)
+
 
 def main():
     f = open("input.txt", "r")
     start, end = "start", "end"
     graph, lower = create_graph(f.readlines(), start, end)
-    print(part1(graph, lower, start, end)) #Part 1: 5576
-    print(part2(graph, lower, start, end)) #Part 2: 152837
+    print(solve(graph, lower, start, end, False)) #Part 1: 5576
+    print(solve(graph, lower, start, end, True)) #Part 2: 152837
     f.close()
 
 if __name__ == "__main__":
