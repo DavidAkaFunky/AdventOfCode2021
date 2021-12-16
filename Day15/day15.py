@@ -1,5 +1,5 @@
 def solve(risks, source, target):
-    import numpy as np
+    import heapq
     def get_neighbours(graph, i, j):
         neighbours = []
         for x in (i-1, i+1):
@@ -12,18 +12,17 @@ def solve(risks, source, target):
     dist, queue = [], []
     for x in range(len(risks)):
         dist.append([float("inf") for _ in range(len(risks[x]))])
-        for y in range(len(risks[x])):
-            queue.append((x, y))
     dist[source[0]][source[1]] = 0
+    queue.append((0, (source[0], source[1])))
     while queue != []:
-        lst = np.array([dist[x][y] for (x,y) in queue])
-        x = np.where(lst==np.min(lst))[0][0]
-        u = queue.pop(x)
-        if u == target:
-            return dist[u[0]][u[1]]
-        for v in get_neighbours(risks, u[0], u[1]):
-            if v in queue:
-                dist[v[0]][v[1]] = min(dist[u[0]][u[1]] + risks[v[0]][v[1]], dist[v[0]][v[1]])
+        u = heapq.heappop(queue)
+        if u[1] == target:
+            return u[0]
+        for v in get_neighbours(risks, u[1][0], u[1][1]):
+            alt = u[0] + risks[v[0]][v[1]]
+            if alt < dist[v[0]][v[1]]:
+                dist[v[0]][v[1]] = alt
+                heapq.heappush(queue, (alt, (v[0], v[1])))
 
 def expand_graph(graph, factor):
     from copy import deepcopy
@@ -55,7 +54,7 @@ def main():
     graph = [[int(x) for x in line.strip()] for line in f.readlines()]
     print(solve(graph, (0,0), (len(graph[0]) - 1, len(graph) - 1))) #Part 1: 595
     new_graph = expand_graph(graph, 5)
-    print(solve(new_graph, (0,0), (len(new_graph[0]) - 1, len(new_graph) - 1))) #Part 2: ???
+    print(solve(new_graph, (0,0), (len(new_graph[0]) - 1, len(new_graph) - 1))) #Part 2: 2914
     f.close()
 
 if __name__ == "__main__":
