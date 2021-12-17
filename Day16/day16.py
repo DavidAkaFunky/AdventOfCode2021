@@ -1,5 +1,4 @@
 def solve(number, string, ops, flag = False, count = 0):
-    from time import sleep
     i = 0
     sum = 0
     while i < len(number) - 7:
