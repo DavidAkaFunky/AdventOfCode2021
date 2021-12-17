@@ -28,7 +28,6 @@ def test(x_min, x_max, y_min, y_max, vel_x_init, vel_y_init):
         (x, y), (vel_x, vel_y) = update_pos(x, y, vel_x, vel_y), update_vel(vel_x, vel_y)
         height = max(height, y)
         if x_min <= x <= x_max and y_min <= y <= y_max:
-            print(vel_x_init, vel_y_init, height)
             return height
     return -1
 
@@ -49,7 +48,7 @@ def main():
     x_min, x_max, y_min, y_max = process(f.readline().strip())
     height, count = solve(x_min, x_max, y_min, y_max, x_max, 1000) #Brute-force with vel_y_max = 1000
     print(height) #Part 1: 30628
-    print(count) #Part 2:
+    print(count) #Part 2: 4433
     f.close()
 
 if __name__ == "__main__":
