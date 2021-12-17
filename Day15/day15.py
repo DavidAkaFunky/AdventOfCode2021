@@ -49,7 +49,6 @@ def expand_graph(graph, factor):
     return new_graph
 
 def main():
-    import numpy as np
     f = open("input.txt", "r")
     graph = [[int(x) for x in line.strip()] for line in f.readlines()]
     print(solve(graph, (0,0), (len(graph[0]) - 1, len(graph) - 1))) #Part 1: 595
