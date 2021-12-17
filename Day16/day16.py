@@ -57,8 +57,7 @@ def main():
     number = bin(int("1" + f.readline(), 16))[3:]
     (sum_pack, _, expr) = solve(number, "", {0: "sum([", 1: "product([", 2: "min([", 3: "max([", 5: "greater([", 6: "less([", 7: "equal(["})
     print(sum_pack) #Part 1: 860
-    expr = expr[:-1]
-    print(eval(expr)) #Part 2: 470949537659
+    print(eval(expr[:-1])) #Part 2: 470949537659
     f.close()
 
 if __name__ == "__main__":
